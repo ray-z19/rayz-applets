@@ -1,0 +1,8 @@
+.header-icons {
+  width: 50px;
+  margin: 5px;
+}
+
+.header-icons:hover {
+  border: 1px black solid;
+}

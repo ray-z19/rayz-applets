@@ -1,0 +1,14 @@
+.calculator {
+  width: 25%;
+  height: 75%;
+  border-radius: 10px;
+  background-color: black;
+}
+
+.expression-display {
+  height: 10%;
+  margin: 5%;
+  margin-top: 25%;
+  border-radius: 10px;
+  background-color: #36ADA3;
+}

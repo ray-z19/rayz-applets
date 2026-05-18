@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { Header } from "./Header";
+import { Footer } from "./Footer";
 
 import pageStyles from "../css_modules/PageStyles.module.css"
 import textStyles from "../css_modules/TextStyles.module.css"
@@ -20,7 +21,7 @@ const LandingPage = () => {
         <h1 className={textStyles["welcome-message"]}>{welcomeMessage}</h1>
         <input type="text" id="welcome-message-input" className={inputStyles["input-box"]} onChange={handleMessageChange} />
       </div>
-      <div className={pageStyles["footer"]}></div>
+      <Footer />
     </>
   )
 }

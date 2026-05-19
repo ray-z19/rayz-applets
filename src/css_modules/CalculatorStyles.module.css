@@ -21,9 +21,11 @@
 }
 
 .expression-display {
-  height: 10%;
+  height: 12.5%;
   margin: 5%;
   margin-top: 0%;
+  overflow-x: auto;
+  overflow-y: 0;
   border-radius: 5px;
   background-color: #36ADA3;
 }

@@ -1,6 +1,6 @@
 .calculator {
-  width: 25%;
-  height: 75%;
+  width: 20%;
+  aspect-ratio: 1 / 2;
   border-radius: 10px;
   background-color: black;
 }
@@ -30,7 +30,6 @@
   padding: 0 2.5%;
 
   overflow-x: auto;
-  overflow-y: 0;
   border-radius: 5px;
   background-color: #36ADA3;
   color: black;

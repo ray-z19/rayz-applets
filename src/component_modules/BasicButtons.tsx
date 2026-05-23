@@ -1,12 +1,18 @@
+import { useState } from "react";
+
 import calculatorStyles from "../css_modules/CalculatorStyles.module.css"
 
 type BasicButtonsProps = {
   expression: string;
   setExpression: (_: string) => void;
+  setResult: (_: string) => void;
 }
 
-const BasicButtons = ({ expression, setExpression }: BasicButtonsProps) => {
+const BasicButtons = ({ expression, setExpression, setResult }: BasicButtonsProps) => {
+  const [onResultScreen, setOnResultScreen] = useState(false);
+  
   const appendElement = (element: string) => {
+    setOnResultScreen(false);
     setExpression(expression + element);
   }
 
@@ -16,6 +22,12 @@ const BasicButtons = ({ expression, setExpression }: BasicButtonsProps) => {
 
   const clearAll = () => {
     setExpression("");
+    setResult("")
+  }
+
+  const echoExpression = () => {
+    setResult(expression);
+    setOnResultScreen(true)
   }
   
   return (
@@ -23,7 +35,10 @@ const BasicButtons = ({ expression, setExpression }: BasicButtonsProps) => {
       <button onClick={() => appendElement("7")}>7</button>
       <button onClick={() => appendElement("8")}>8</button>
       <button onClick={() => appendElement("9")}>9</button>
-      <button className={calculatorStyles["deletion-button"]} onClick={backspace}>DEL</button>
+      {
+        !onResultScreen ? <button className={calculatorStyles["deletion-button"]} onClick={backspace}>DEL</button>
+          : <button disabled={true}>DEL</button>
+      }
       <button className={calculatorStyles["deletion-button"]} onClick={clearAll}>AC</button>
       <button onClick={() => appendElement("4")}>4</button>
       <button onClick={() => appendElement("5")}>5</button>
@@ -39,7 +54,7 @@ const BasicButtons = ({ expression, setExpression }: BasicButtonsProps) => {
       <button onClick={() => appendElement(".")}>.</button>
       <button></button>
       <button onClick={() => appendElement("Ans")}>Ans</button>
-      <button>=</button>
+      <button onClick={echoExpression}>=</button>
     </div>
   )
 }

@@ -9,6 +9,7 @@ import calculatorStyles from "../css_modules/CalculatorStyles.module.css"
 
 const CalculatorPage = () => {
   const [expression, setExpression] = useState("");
+  const [result, setResult] = useState("");
   
   return (
     <>
@@ -21,8 +22,11 @@ const CalculatorPage = () => {
           </div>
           <i style={{fontSize: "75%"}}>NATURAL-V.P.A.M.</i>
           <div className={calculatorStyles["edition"]}>2nd edition</div>
-          <div className={calculatorStyles["expression-display"]}>{expression}</div>
-          <BasicButtons expression={expression} setExpression={setExpression} />
+          <div className={calculatorStyles["expression-display"]}>
+            <div className={calculatorStyles["expression-text"]}>{expression}</div>
+            {result ? <div className={calculatorStyles["result-text"]}>{result}</div>: null}
+          </div>
+          <BasicButtons expression={expression} setExpression={setExpression} setResult={setResult} />
         </div>
       </div>
       <Footer />

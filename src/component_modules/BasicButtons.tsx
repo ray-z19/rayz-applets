@@ -20,9 +20,10 @@ const BasicButtons = ({ expression, setExpression, setResult }: BasicButtonsProp
     setExpression(expression.slice(0, expression.length - 1));
   }
 
-  const clearAll = () => {
+  const clearDisplayFields = () => {
     setExpression("");
-    setResult("")
+    setResult("");
+    setOnResultScreen(false);
   }
 
   const echoExpression = () => {
@@ -39,7 +40,7 @@ const BasicButtons = ({ expression, setExpression, setResult }: BasicButtonsProp
         !onResultScreen ? <button className={calculatorStyles["deletion-button"]} onClick={backspace}>DEL</button>
           : <button disabled={true}>DEL</button>
       }
-      <button className={calculatorStyles["deletion-button"]} onClick={clearAll}>AC</button>
+      <button className={calculatorStyles["deletion-button"]} onClick={clearDisplayFields}>AC</button>
       <button onClick={() => appendElement("4")}>4</button>
       <button onClick={() => appendElement("5")}>5</button>
       <button onClick={() => appendElement("6")}>6</button>

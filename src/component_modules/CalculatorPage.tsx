@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Header } from "./Header";
 import { BasicButtons } from "./BasicButtons";
@@ -8,8 +8,46 @@ import pageStyles from "../css_modules/PageStyles.module.css"
 import calculatorStyles from "../css_modules/CalculatorStyles.module.css"
 
 const CalculatorPage = () => {
+  const [expressionArray, setExpressionArray] = useState<(number | string)[]>([]);
   const [expression, setExpression] = useState("");
   const [result, setResult] = useState("");
+  const [isEqualsPressed, setIsEqualsPressed] = useState(false);
+
+  useEffect(() => {
+    if (isEqualsPressed) {
+      calculateResult();
+    }
+  }, [isEqualsPressed])
+
+  const pushElem = (elem: string | number) => {
+    setIsEqualsPressed(false);
+    
+    expressionArray.push(elem);
+    setExpressionArray(expressionArray);
+    setExpression(expression + elem);
+  }
+
+  const popElem = () => {
+    const poppedElem = expressionArray.pop();
+    setExpressionArray(expressionArray);
+    if (poppedElem === "ANS") {
+      setExpression(expression.slice(0, expression.length - 3));
+    } else {
+      setExpression(expression.slice(0, expression.length - 1));
+    }
+    console.log(expressionArray);
+  }
+
+  const clearDisplayFields = () => {
+    setExpressionArray([]);
+    setExpression("");
+    setResult("");
+    setIsEqualsPressed(false);
+  }
+
+  const calculateResult = () => {
+    setResult(expression);
+  }
   
   return (
     <>
@@ -26,7 +64,13 @@ const CalculatorPage = () => {
             <div className={calculatorStyles["expression-text"]}>{expression}</div>
             {result ? <div className={calculatorStyles["result-text"]}>{result}</div>: null}
           </div>
-          <BasicButtons expression={expression} setExpression={setExpression} setResult={setResult} />
+          <BasicButtons
+            pushElem={pushElem}
+            popElem={popElem}
+            clearDisplayFields={clearDisplayFields}
+            isEqualsPressed={isEqualsPressed}
+            setIsEqualsPressed={setIsEqualsPressed}
+          />
         </div>
       </div>
       <Footer />

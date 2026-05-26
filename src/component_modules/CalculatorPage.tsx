@@ -16,15 +16,25 @@ const CalculatorPage = () => {
   useEffect(() => {
     if (isEqualsPressed) {
       calculateResult();
+      console.log(expressionArray);
+      console.log(expression);
+      console.log(result);
     }
   }, [isEqualsPressed])
 
   const pushElem = (elem: string | number) => {
-    setIsEqualsPressed(false);
+    if (isEqualsPressed === true) {
+      clearDisplayFields();
+      setIsEqualsPressed(false);
     
-    expressionArray.push(elem);
-    setExpressionArray(expressionArray);
-    setExpression(expression + elem);
+      if (typeof elem !== "number" && ["+", "-", "*", "/"].includes(elem)) {
+        setExpressionArray(prev => [...prev, "Ans"]);
+        setExpression(prev => prev + "Ans");
+      }
+    }
+    
+    setExpressionArray(prev => [...prev, elem]);
+    setExpression(prev => prev + elem);
   }
 
   const popElem = () => {
@@ -42,7 +52,6 @@ const CalculatorPage = () => {
     setExpressionArray([]);
     setExpression("");
     setResult("");
-    setIsEqualsPressed(false);
   }
 
   const calculateResult = () => {
